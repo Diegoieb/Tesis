@@ -17,7 +17,7 @@ const perfil = () => {
     fechaNacimiento: "",
     direccion: "",
     gradoDependencia: "",
-    password: "",
+    newPassword: "",
   });
 
   const userId = JSON.parse(localStorage.getItem("usuario"))?.id_usuario;
@@ -39,7 +39,8 @@ const perfil = () => {
           fechaNacimiento: response.data.fechaNacimiento || "",
           direccion: response.data.direccion || "",
           gradoDependencia: response.data.gradoDependencia || "",
-          password: "",
+          password: response.data.password,
+          newPassword:''
         });
         // Asignar el rol desde localStorage
         const userRole = JSON.parse(localStorage.getItem("usuario"))?.rol || "";
@@ -77,6 +78,7 @@ const perfil = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Filtrar los datos a enviar según el rol
+
         const updatedData = rol === "especialista"
           ? {
               rut: formData.rut,
@@ -86,7 +88,8 @@ const perfil = () => {
               email: formData.email,
               fechaNacimiento: formData.fechaNacimiento,
               direccion: formData.direccion,
-              password: formData.password,
+              password:formData.password,
+              newPassword: formData.newPassword,
             }
           : {
               rut: formData.rut,
@@ -96,7 +99,8 @@ const perfil = () => {
               email: formData.email,
               fechaNacimiento: formData.fechaNacimiento,
               direccion: formData.direccion,
-              password: formData.password,
+              password:formData.password,
+              newPassword: formData.newPassword,
             };
 
         api
@@ -236,8 +240,8 @@ const perfil = () => {
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
-                name="password"
-                value={formData.password}
+                name="newPassword"
+                value={formData.newPassword}
                 onChange={handleChange}
                 placeholder="Ingrese su nueva contraseña"
               />

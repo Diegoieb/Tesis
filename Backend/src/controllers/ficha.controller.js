@@ -15,9 +15,9 @@ const obtenerFichas = async (req, res) => {
             ]
         });
 
-        if (fichas.length === 0) {
-            return res.status(404).json({ error: 'No hay fichas registradas' });
-        }
+        // if (fichas.length === 0) {
+        //     return res.status(404).json({ error: 'No hay fichas registradas' });
+        // } causa error en terminar cita por que falla el servicio pero deberia ser solo una lista vacia
 
         res.json(fichas);
     } catch (error) {

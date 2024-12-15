@@ -2,3 +2,10 @@
     height: 100dvh;
 }
 
+.gradientePrimary{
+    background: linear-gradient(
+        to bottom, 
+        #0d6efd 40%, /* Color inicial */
+        #d6f2fe 100% /* Color final */
+      );
+    }

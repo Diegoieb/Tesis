@@ -62,13 +62,13 @@ const Login = () => {
     <>
     <div className="fondo">
         <div className="contenedor">
-            <h1 className="titulo display-5">Login</h1>{error && <p>{error}</p>}
+            <h1 className="titulo display-5">Iniciar Sesión</h1>{error && <p>{error}</p>}
             
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control formulario" placeholder="Email" aria-label="email"></input>
             
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control formulario" placeholder="Clave" aria-label="Clave"></input>
             <button onClick={handleLogin} className='btn btn-secondary mt-4 boton'>Ingresar</button>
-            <p>¿No estas registrado?</p><a href={"/Registro"}>Registrate</a>
+            <p>¿No estas registrado?</p><a href={"/tesis/#/Registro"}>Registrate</a>
             {/* <button  onClick={prueba}>PRUEBAAAAAAAAAAAAA </button> */}
         </div>
     </div>

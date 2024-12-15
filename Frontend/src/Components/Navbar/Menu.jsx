@@ -35,24 +35,24 @@ if (usuario) {
     <div>
     <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
     <Container>
-      <Navbar.Brand href="/">Plataforma de Atención</Navbar.Brand>
+      <Navbar.Brand href="/">Plataforma De Atención Domiciliaria</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
           {rol === "paciente" && (
             <>
-              <Nav.Link href="/perfil">Mi perfil</Nav.Link>
-              <Nav.Link href="/calendario">Agendar Cita</Nav.Link>
-              <Nav.Link href="/atenciones">Mis Atenciones</Nav.Link>
+              <Nav.Link href="/tesis/#/perfil">Mi perfil</Nav.Link>
+              <Nav.Link href="/tesis/#/calendario">Agendar Cita</Nav.Link>
+              <Nav.Link href="/tesis/#/atenciones">Mis Atenciones</Nav.Link>
               <Nav.Link onClick={handleLogout}>Cerrar Sesión</Nav.Link>
             </>
           )}
           {rol === "especialista" && (
             <>
-              <Nav.Link href="/perfil">Mi perfil</Nav.Link>
-              <Nav.Link href="/calendario">Agendar Cita</Nav.Link>
-              <Nav.Link href="/citas">Mis Citas</Nav.Link>
-              <Nav.Link href="/pacientes">Pacientes</Nav.Link>
+              <Nav.Link href="/tesis/#/perfil">Mi perfil</Nav.Link>
+              <Nav.Link href="/tesis/#/calendario">Mi Agenda</Nav.Link>
+              <Nav.Link href="/tesis/#/citas">Mis Citas</Nav.Link>
+              <Nav.Link href="/tesis/#/pacientes">Pacientes</Nav.Link>
               <Nav.Link onClick={handleLogout}>Cerrar Sesión</Nav.Link>
             </>
           )}

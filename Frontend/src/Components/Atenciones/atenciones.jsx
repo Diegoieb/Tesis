@@ -115,23 +115,23 @@ const Atenciones = () => {
               </tr>
             </thead>
             <tbody>
-              {atenciones.map((atencion) => (
-                <tr key={atencion.id_atencion}>
-                  <td>{new Date(atencion.fecha_atencion).toLocaleString()}</td>
-                  <td>{atencion.especialista?.nombre || "No asignado"}</td>
-                  <td>{atencion.tipo_atencion}</td>
-                  <td>{atencion.resumen}</td>
-                  <td>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => handleVerDetalles(atencion)}
-                    >
-                      Ver detalles
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+  {atenciones.map((atencion) => (
+    <tr key={atencion.id_atencion}>
+      <td>{new Date(atencion.fecha_atencion).toLocaleString()}</td>
+      <td>{atencion.especialista ? atencion.especialista.nombre +' ('+atencion.especialista.rut+')' : "No asignado"}</td>
+      <td>{atencion.tipo_atencion}</td>
+      <td>{atencion.resumen}</td>
+      <td>
+        <button
+          className="btn btn-info"
+          onClick={() => handleVerDetalles(atencion)}
+        >
+          Ver detalles
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
           </Table>
         </Col>
       </Row>

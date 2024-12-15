@@ -18,6 +18,7 @@ const Citas = () => {
 
   if (usuario) {
     try {
+    
       const user = JSON.parse(usuario);
       userId = user?.id_usuario || null;
     } catch (error) {
@@ -26,7 +27,7 @@ const Citas = () => {
   } else {
     console.warn("No se encontró el usuario en el localStorage");
   }
-
+  console.log(usuario,userId)
   const fetchCitas = async () => {
     try {
       const response = await api.get(`/citas`, {
@@ -36,7 +37,7 @@ const Citas = () => {
       //console.log("reponse.data",response.data)
       setPaciente(response.data.id_paciente);
       const citasDelDia = response.data.filter(
-        (cita) => cita.fecha_cita.startsWith(hoy) && cita.id_especialista === userId
+        (cita) => cita.id_especialista === userId
       );
       setCitas(citasDelDia);
 
@@ -172,8 +173,15 @@ const terminarCita=async(cita)=>{
     const fechaHora = new Date(cita.fecha_cita); // Convertir la fecha y hora a objeto Date
     const fecha = fechaHora.toISOString().split("T")[0];
     //console.log(cita)
-    navigate('/finalizarAtencion',{state:{id_cita:cita.id_cita,id_paciente:cita.id_paciente, id_especialista:cita.id_especialista,fecha}})
+    navigate('/finalizarAtencion',{state:{id_cita:cita.id_cita,id_paciente:cita.id_paciente, id_especialista:cita.id_especialista,fecha,Paciente:cita.Paciente,estado:cita.estado}})
 }
+const verDetalle=async(cita)=>{
+    const fechaHora = new Date(cita.fecha_cita); // Convertir la fecha y hora a objeto Date
+    const fecha = fechaHora.toISOString().split("T")[0];
+    //console.log(cita)
+    navigate('/DetalleCita',{state:{id_cita:cita.id_cita,id_paciente:cita.id_paciente, id_especialista:cita.id_especialista,fecha,Paciente:cita.Paciente}})
+}
+
 
 
   if (loading) return <p>Cargando...</p>;
@@ -181,12 +189,13 @@ const terminarCita=async(cita)=>{
   return (
     <Container fluid className="px-0">
       <Menu />
-      <h3 className="text-center mb-4">Citas de Hoy</h3>
+      <h3 className="text-center mb-4">Historial de Citas</h3>
       <Row className="px-4">
         <Col>
           <Table striped bordered hover responsive>
             <thead>
               <tr>
+                <th>FECHA</th>
                 <th>Hora</th>
                 <th>Estado</th>
                 <th>Título</th>
@@ -197,6 +206,9 @@ const terminarCita=async(cita)=>{
             <tbody>
               {citas.map((cita) => (
                 <tr key={cita.id_cita}>
+                   <td>
+                    {new Date(cita.fecha_cita).toLocaleDateString()}
+                  </td>
                   <td>
                     {new Date(cita.fecha_cita).toLocaleTimeString([], {
                       hour: "2-digit",
@@ -205,8 +217,17 @@ const terminarCita=async(cita)=>{
                   </td>
                   <td>{cita.estado}</td>
                   <td>{cita.title}</td>
-                  <td>{cita.Paciente.nombre}</td>
+                  <td>{cita.Paciente?.nombre}</td>
                   <td>
+                    <Button
+                      variant="success"
+                      size="sm"
+                      style={{marginRight:'5px'}}
+                      onClick={() => verDetalle(cita)}
+                      disabled={!cita?.estado?.startsWith('T')}
+                    >
+                     ver detalle
+                    </Button>
                     <Button
                       variant="danger"
                       size="sm"
@@ -226,7 +247,7 @@ const terminarCita=async(cita)=>{
                       size="sm"
                       onClick={() => terminarCita(cita)}
                     >
-                      Terminar
+                      {cita?.estado?.startsWith('T')?'Agregar Diagnostico':'Generar atencion'}
                     </Button>
                   </td>
                 </tr>
